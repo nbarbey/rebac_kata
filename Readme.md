@@ -1,4 +1,4 @@
-# ReBAC kata
+# Relation Based Access Control (ReBAC) kata
 
 This is a kata to learn about Relation-Based Access Control (ReBAC) (see: https://en.wikipedia.org/wiki/Relationship-based_access_control).
 
