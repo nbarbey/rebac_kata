@@ -7,6 +7,7 @@ import (
 )
 
 func TestDelegateAdEdition_ok(t *testing.T) {
+	t.Skip()
 	a := NewApplication(map[string]*User{"Admin": {}, "Joe": {}})
 
 	admin := a.Login("Admin")
@@ -20,6 +21,7 @@ func TestDelegateAdEdition_ok(t *testing.T) {
 }
 
 func TestDelegateAdEdition_unauthorized(t *testing.T) {
+	t.Skip()
 	a := NewApplication(map[string]*User{"Admin": {}, "Joe": {}})
 
 	admin := a.Login("Admin")

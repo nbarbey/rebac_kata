@@ -3,7 +3,8 @@ package rebac_kata
 import "errors"
 
 type User struct {
-	a *Application
+	Name string
+	a    *Application
 }
 
 var ErrUnauthorized = errors.New("user is not authorized")

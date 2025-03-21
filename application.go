@@ -7,8 +7,9 @@ type Application struct {
 
 func NewApplication(users map[string]*User) *Application {
 	a := &Application{ads: make(map[int]*Ad), users: users}
-	for _, user := range a.users {
+	for name, user := range a.users {
 		user.a = a
+		user.Name = name
 	}
 	return a
 }
