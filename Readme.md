@@ -4,8 +4,9 @@ This is a kata to learn about Relation-Based Access Control (ReBAC) (see: https:
 
 ## Subject
 
-You are a classified ad company.
-The user ask for a feature allowing to give someone a permission to edit one of their own ads.
+You are a developer in a classified ad company.
+Your task is to implement a feature to allow users to give the permission
+to other users to edit their ads.
 
 ## Hints
 
@@ -16,7 +17,7 @@ the solution.
 
 Bonus requirements:
 
-* Add a notion of an organization. Only the members of the organization are allowed to delegate to other members of the organization.
+* Add a notion of an organization. The members of the organization are only allowed to delegate to other members of the organization.
 * Add a super admin. The super admin can create other admins. Admins can give delegations to anyone across organisations.
 * Add an option to make the delegated authorization temporary.
 
