@@ -13,11 +13,11 @@ func TestDelegateAdEdition_unauthorized(t *testing.T) {
 	jane := a.Login("Jane")
 	adId := jane.PublishAd(&Ad{Title: "LEGO Space Astronaut", Price: 30})
 
-	user := a.Login("Joe")
-	err := user.ChangeAdPrice(adId, 10)
+	joe := a.Login("Joe")
+	err := joe.ChangeAdPrice(adId, 10)
 	require.ErrorIs(t, err, ErrUnauthorized)
 
-	assert.Equal(t, 10, user.GetAd(adId).Price)
+	assert.Equal(t, 10, joe.GetAd(adId).Price)
 }
 
 func TestDelegateAdEdition_ok(t *testing.T) {
@@ -28,8 +28,8 @@ func TestDelegateAdEdition_ok(t *testing.T) {
 	adId := jane.PublishAd(&Ad{Title: "LEGO Space Astronaut", Price: 30})
 
 	jane.DelegateAdEdition(ForAd(adId), ToUser("Joe"))
-	user := a.Login("Joe")
-	require.NoError(t, user.ChangeAdPrice(adId, 10))
+	joe := a.Login("Joe")
+	require.NoError(t, joe.ChangeAdPrice(adId, 10))
 
-	assert.Equal(t, 10, user.GetAd(adId).Price)
+	assert.Equal(t, 10, joe.GetAd(adId).Price)
 }
