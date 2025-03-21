@@ -27,7 +27,7 @@ func TestDelegateAdEdition_ok(t *testing.T) {
 	jane := a.Login("Jane")
 	adId := jane.PublishAd(&Ad{Title: "LEGO Space Astronaut", Price: 30})
 
-	jane.DelegateAdEdition(ForAd(adId), ToUser("Joe"))
+	jane.DelegateAdEdition(adId, "Joe")
 	joe := a.Login("Joe")
 	require.NoError(t, joe.ChangeAdPrice(adId, 10))
 
