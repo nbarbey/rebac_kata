@@ -23,3 +23,9 @@ Bonus requirements:
 ## Constraint
 
 The permission logic code should not leak into the Ad code and the User management code except for checking permissions and declaring relations.
+
+## Notes
+
+The User domain and Ad domain should remain decoupled as much as possible.
+ReBAC is a wonderful tool for having loosely coupled domains.
+To convince yourself about this, you can contrast a ReBAC solution with a solution without ReBAC.
