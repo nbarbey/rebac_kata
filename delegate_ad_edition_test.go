@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestDelegateAdEdition_unauthorized(t *testing.T) {
+func TestUserCannotEditAdOfAnotherUser(t *testing.T) {
 	t.Skip()
 	a := NewApplication(map[string]*User{"Jane": {}, "Joe": {}})
 
@@ -16,8 +16,18 @@ func TestDelegateAdEdition_unauthorized(t *testing.T) {
 	joe := a.Login("Joe")
 	err := joe.ChangeAdPrice(adId, 10)
 	require.ErrorIs(t, err, ErrUnauthorized)
+}
 
-	assert.Equal(t, 10, joe.GetAd(adId).Price)
+func TestUserCanEditOwnAd(t *testing.T) {
+	t.Skip()
+	a := NewApplication(map[string]*User{"Jane": {}, "Joe": {}})
+
+	jane := a.Login("Jane")
+	adId := jane.PublishAd(&Ad{Title: "LEGO Space Astronaut", Price: 30})
+
+	require.NoError(t, jane.ChangeAdPrice(adId, 10))
+
+	assert.Equal(t, 10, jane.GetAd(adId).Price)
 }
 
 func TestDelegateAdEdition_ok(t *testing.T) {
