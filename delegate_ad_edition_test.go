@@ -1,7 +1,33 @@
 package rebac_kata
 
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"testing"
+)
 
-func TestDelegateAdEdition(t *testing.T) {
+func TestDelegateAdEdition_ok(t *testing.T) {
+	a := NewApplication(map[string]*User{"Admin": {}, "Joe": {}})
 
+	admin := a.Login("Admin")
+	adId := admin.PublishAd(&Ad{Title: "LEGO Space Astronaut", Price: 30})
+
+	admin.DelegateAdEdition(ForAd(adId), ToUser("Joe"))
+	user := a.Login("Joe")
+	require.NoError(t, user.ChangeAdPrice(adId, 10))
+
+	assert.Equal(t, 10, user.GetAd(adId).Price)
+}
+
+func TestDelegateAdEdition_unauthorized(t *testing.T) {
+	a := NewApplication(map[string]*User{"Admin": {}, "Joe": {}})
+
+	admin := a.Login("Admin")
+	adId := admin.PublishAd(&Ad{Title: "LEGO Space Astronaut", Price: 30})
+
+	user := a.Login("Joe")
+	err := user.ChangeAdPrice(adId, 10)
+	require.ErrorIs(t, err, ErrUnauthorized)
+
+	assert.Equal(t, 10, user.GetAd(adId).Price)
 }
